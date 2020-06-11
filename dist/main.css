@@ -1,0 +1,1 @@
+form{border:1px solid #545454;border-radius:3px;padding:40px}form,input{width:100%;margin-left:auto;margin-right:auto}input{line-height:16px}header{justify-content:space-between;padding:10px 40px}body,header{display:flex}body{flex-direction:column;min-height:100vh}main{flex:2}section{max-width:800px;width:100%;margin-left:auto;margin-right:auto}

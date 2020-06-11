@@ -1,15 +1,28 @@
-function handleSubmit(event) {
+async function handleSubmit(event) {
     event.preventDefault()
 
     // check what text was put into the form field
-    let formText = document.getElementById('name').value
-    checkForName(formText)
+    let nlpUrl = document.getElementById('url').value
+    if  (!Client.validateURL (nlpUrl)) {
+        console.log('Wrong url entered')
+    }
 
     console.log("::: Form Submitted :::")
-    fetch('http://localhost:8080/test')
+    await fetch("http://localhost:8081/nlpAnalysis", {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({url:nlpUrl})
+    })
     .then(res => res.json())
     .then(function(res) {
-        document.getElementById('results').innerHTML = res.message
+        document.getElementById('polarity').innerHTML = res.polarity
+        document.getElementById('subjectivity').innerHTML = res.subjectivity
+        document.getElementById('polarity_confidence').innerHTML = res.polarity_confidence
+        document.getElementById('subjectivity_confidence').innerHTML = res.subjectivity_confidence
+        document.getElementById('text').innerHTML = res.text
     })
 }
 
